@@ -103,12 +103,21 @@ if(isset($_POST["resend"]))
   <script src="http://code.jquery.com/jquery.js"></script>
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
  </head>
+ <style>
+     body {
+    background-color: rgb(168, 111, 111);
+    background-image: url(./web_images/bg2.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100%;
+ }
+ </style>
  <body>
   <br />
   <div class="container">
-   <h3 align="center">Resend Verification OTP </h3>
+   <h3 align="center" >Resend Verification OTP </h3>
    <br />
-   <div class="panel panel-default">
+   <div class="panel panel-warning">
     <div class="panel-heading">
      <h3 class="panel-title">Resend Verification OTP</h3>
     </div>

@@ -1,0 +1,27 @@
+table, th, td{
+    border: 1px solid black;
+    height: 50px;
+    width: 1000px;
+}
+table{
+    border-collapse:collapse;
+    margin: 150px auto;
+    text-align: center;
+    box-shadow: 1px 1px 2px 1px #66CDAA;   
+}
+
+table tr:nth-child(odd){
+    background-color:#DCDCDC;
+}
+table tr:nth-child(even){
+    background-color:white;
+}
+table tr:nth-child(1){
+    background-color:skyblue;
+}
+.content_ql{
+    background-color: black;
+    background-image: url(../../web_images/bg2.jpg);
+    background-size: cover;
+    min-height: 100%;
+}

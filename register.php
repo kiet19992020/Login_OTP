@@ -19,9 +19,11 @@ $message = '';
 $error_user_name = '';
 $error_user_email = '';
 $error_user_password = '';
+$error_user_repassword = '';
 $user_name = '';
 $user_email = '';
 $user_password = '';
+$user_repassword = '';
 
 if(isset($_POST["register"]))
 {
@@ -55,10 +57,30 @@ if(isset($_POST["register"]))
  else
  {
   $user_password = trim($_POST["user_password"]);
-  $user_password = password_hash($user_password, PASSWORD_DEFAULT);
+  $user_password = md5($user_password);
  }
 
- if($error_user_name == '' && $error_user_email == '' && $error_user_password == '')
+ if(empty($_POST["user_repassword"]))
+ {
+  $error_user_repassword = '<label class="text-danger">Enter Repassword</label>';
+ }
+ else
+ {
+  $user_repassword = trim($_POST["user_repassword"]);
+  $user_repassword = md5($user_repassword);
+ }
+
+ if(($_POST["user_repassword"] == $_POST["user_password"]))
+ {
+   $user_repassword = trim($_POST["user_password"]);
+   $user_repassword = md5($user_password); 
+ }
+ else
+ {
+    $error_user_repassword = '<label class="text-danger">Confirm Password is not match</label>';
+ }
+
+ if($error_user_name == '' && $error_user_email == '' && $error_user_password == '' && $error_user_repassword == '')
  {
   $user_activation_code = md5(rand());
 
@@ -68,6 +90,7 @@ if(isset($_POST["register"]))
    ':user_name'  => $user_name,
    ':user_email'  => $user_email,
    ':user_password' => $user_password,
+   ':user_repassword' => $user_repassword,
    ':user_activation_code' => $user_activation_code,
    ':user_email_status'=> 'not verified',
    ':user_otp'   => $user_otp
@@ -75,8 +98,8 @@ if(isset($_POST["register"]))
 
   $query = "
   INSERT INTO register_user 
-  (user_name, user_email, user_password, user_activation_code, user_email_status, user_otp)
-  SELECT * FROM (SELECT :user_name, :user_email, :user_password, :user_activation_code, :user_email_status, :user_otp) AS tmp
+  (user_name, user_email, user_password,user_repassword ,user_activation_code, user_email_status, user_otp)
+  SELECT * FROM (SELECT :user_name, :user_email, :user_password,:user_repassword ,:user_activation_code, :user_email_status, :user_otp) AS tmp
   WHERE NOT EXISTS (
       SELECT user_email FROM register_user WHERE user_email = :user_email OR user_name = :user_name
   ) 
@@ -116,8 +139,8 @@ if(isset($_POST["register"]))
     // $mail->SMTPDebug = 3;
    $message_body = '
    <p>Mã xác thực OTP của bạn là: <b>'.$user_otp.'</b>.</p>
-   <p>kietnguyen,</p>
-   <p>Nguyễn Tấn Kiệt</p>
+   <p>Không nên cung cấp mã này cho bất kỳ ai!</p>
+   <p>NTK-admin</p>
    ';
    $mail->Body = $message_body;
 
@@ -143,27 +166,36 @@ if(isset($_POST["register"]))
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="http://code.jquery.com/jquery.js"></script>
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+     <link href="back-end/css/admin/style.css" rel="stylesheet"/>
+     <link href="back-end/css/admin/register.css" rel="stylesheet"/>
  </head>
+
  <body>
- <h1 style="text-align: center;">SIGN UP</h1>
-  <br />
+ <div class="svg-wrapper">
+  <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
+    <rect class="shape" height="60" width="320" />
+  </svg>
+   <H1 style="text-align: center;" class="text">Register</H1>
+</div>
+ 
+ 
   <div class="container">
-   <br />
-   <div class="panel panel-default">
+   
+   <div class="panel panel-info">
     <div class="panel-heading">
-     <h3 class="panel-title">Registration</h3>
+ 
     </div>
     <div class="panel-body">
      <?php echo $message; ?>
      <form method="post">
       <div class="form-group">
        <label>Enter Your Name</label>
-       <input type="text" name="user_name" class="form-control" />
+       <input type="text" name="user_name" value="<?php  echo $user_name;?>"  class="form-control" />
        <?php echo $error_user_name; ?>
       </div>
       <div class="form-group">
        <label>Enter Your Email</label>
-       <input type="text" name="user_email" class="form-control" />
+       <input type="text" name="user_email" value="<?php  echo $user_email;?>" class="form-control" />
        <?php echo $error_user_email; ?>
       </div>
       <div class="form-group">
@@ -173,12 +205,13 @@ if(isset($_POST["register"]))
       </div>
 
       <div class="form-group">
-       <label>Reassword</label>
-       <input type="password" name="user_password" class="form-control" />
-       <?php echo $error_user_password; ?>
+       <label>Repassword</label>
+       <input type="password" name="user_repassword" class="form-control" />
+       <?php echo $error_user_repassword; ?>
       </div>
-      <div class="form-group">
-       <input type="submit" name="register" class="btn btn-success" value="Click to Register" />&nbsp;&nbsp;&nbsp;
+      <div class="form-group text-center">
+       <input type="submit" name="register" class="btn btn-info" value="Click to Register" />&nbsp;&nbsp;&nbsp;
+       <a href="index.php" class="btn btn-warning">Login</a>
       </div>
      </form>
     </div>
@@ -186,5 +219,6 @@ if(isset($_POST["register"]))
   </div>
   <br />
   <br />
+ 
  </body>
 </html>

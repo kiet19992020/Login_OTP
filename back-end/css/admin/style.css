@@ -1,0 +1,13 @@
+body {
+    background-color: rgb(168, 111, 111);
+    background-image: url(../../web_images/bg2.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100%;
+ }
+ h3,h1 {
+     color: white;
+ }
+
+
+ 

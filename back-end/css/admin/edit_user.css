@@ -1,0 +1,66 @@
+.to{
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+}
+.form {
+    border: 1px solid #80808000;
+    grid-column: 6/9;
+    grid-row: 3;
+    min-height: 450px;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 15px;
+    box-shadow: 0px 0px 14px 0px #66CDAA;
+    background-color: white;
+	margin-top: 250px;
+}
+h2 {
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+i.fab.fa-app-store-ios {
+    display: block;
+    margin-bottom: 50px;
+    font-size: 28px;
+}
+ 
+label {
+    margin-left: -126px;
+    display: block;
+    font-weight: lighter;
+ 
+}
+input{
+    display: block;
+    border-bottom: 2px solid #00BCD4;
+    margin-bottom: 20px;
+    outline-style: none;
+}
+
+ 
+input#submit {
+    padding: 7px;
+    width: 23%;
+    border-radius: 10px;
+    border: none;
+    position: absolute;
+    margin-top: 269px;
+    cursor: pointer;
+	margin-right: 80px;
+    
+}
+
+input#submit:hover{
+ 
+    background: linear-gradient(to right, #fc466b, #3f5efb); 
+}
+.content_edit{
+    background-color: black;
+    background-image: url(../../web_images/bg2.jpg);
+    background-size: cover;
+}

@@ -1,59 +1,93 @@
 <?php
-    session_start();
+
+session_start();
+
 ?>
+
 <!DOCTYPE html>
+<html>
+
 <head>
-<title>Quan Ly Admin Web</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- bootstrap-css -->
-<link rel="stylesheet" href="css/bootstrap.min.css" >
-<!-- //bootstrap-css -->
-<!-- Custom CSS -->
-<link href="back-end/css/style.css" rel='stylesheet' type='text/css' />
-<link href="back-end/css/style-responsive.css" rel="stylesheet"/>
-<!-- font CSS -->
-<link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-<!-- font-awesome icons -->
-<link rel="stylesheet" href="{{asset('public/back-end/css/font.css" type="text/css"/>
-<link href="public/back-end/css/font-awesome.css" rel="stylesheet"> 
-<!-- //font-awesome icons -->
-<script src="public/back-end/js/jquery2.0.3.min.js"></script>
-<script src="https://kit.fontawesome.com/2066070c74.js" crossorigin="anonymous"></script>
+    <title>PHP Login with OTP Authentication</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="back-end/css/admin/style.css" rel="stylesheet" />
+    <link href="back-end/css/admin/login.css" rel="stylesheet" />
 </head>
+
 <body>
-<div class="log-w3">
-<div class="w3layouts-main">
-	<h2>Sign Up</h2>
-	<?php
-	 
-        if( isset($_SESSION["thongbao"])){
+
+    <div class="container">
+        <div class="svg-wrapper">
+            <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
+                <rect class="shape" height="60" width="320" />
+            </svg>
+            <h1 style="text-align: center;" class="text">Login</h1>
+        </div>
+
+        <?php
+
+        if (isset($_SESSION["thongbao"])) {
             echo $_SESSION["thongbao"];
             session_unset();
-		}
-    ?>
-		<form action="admin_submit.php" method="POST">
-			<input type="text" class="ggg" name="name" value="UserName" required="">
-			<input type="password" class="ggg" name="password" value="Password" required="">
-			<span><input type="checkbox" />Remember</span>
-			<h6><a href="#">Forget password?</a></h6>
-			<div class="clearfix"></div>
-			<input type="submit" value="Sign in" name="submit">
-		</form>
-		<p>Register!<a href="register.php">sign up </a></p>	
-</div>
-</div>
-<script src="back-end/js/bootstrap.js"></script>
-<script src="back-end/js/jquery.dcjqaccordion.2.7.js"></script>
-<script src="back-end/js/scripts.js"></script>
-<script src="back-end/js/jquery.slimscroll.js"></script>
-<script src="back-end/js/jquery.nicescroll.js"></script>
-<script src="back-end/js/jquery.scrollTo.js"></script>
+        }
+
+        if (isset($_GET["register"])) {
+            if ($_GET["register"] == 'success') {
+                echo '
+     <h1 class="text-success">Email Successfully verified, Registration Process Completed...</h1>
+     ';
+            }
+        }
+
+        if (isset($_GET["reset_password"])) {
+            if ($_GET["reset_password"] == 'success') {
+                echo '<h1 class="text-success">Password change Successfully, Now you can login with your new password</h1>';
+            }
+        }
+        ?>
+
+        <div class="row">
+            <div class="col-md-3">&nbsp;</div>
+            <div class="col-md-6">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+
+                    </div>
+                    <div class="panel-body">
+                        <form method="POST" action="admin_submit.php" id="login_form">
+                            <div class="form-group" id="email_area">
+                                <label>Enter Username</label>
+                                <input type="text" name="user_name" class="form-control" />
+
+                            </div>
+                            <div class="form-group" id="password_area">
+                                <label>Enter Password</label>
+                                <input type="password" name="user_password" class="form-control" />
+
+                            </div>
+                            <div class="form-group" align="center">
+                                <input type="submit" name="login" class="btn btn-warning" value="Login" />
+                                <a href="register.php" class="btn btn-success">Sign Up</a>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="svg-wrapper">
+            <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
+                <rect class="shape" height="60" width="320" />
+            </svg>
+            <h1 style="text-align: center;" class="text"><b><a href="forget_password.php?step1=1">Forgot Password</a></b></h1>
+        </div>
 </body>
+
 </html>
 
-
-
+<script>

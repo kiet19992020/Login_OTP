@@ -44,7 +44,7 @@ if(isset($_GET["code"]))
 
     if($statement->execute())
     {
-     header('location:login.php?register=success');
+     header('location:index.php?register=success');
     }
    }
    else
@@ -67,11 +67,13 @@ else
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="http://code.jquery.com/jquery.js"></script>
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+     <link href="back-end/css/admin/style.css" rel="stylesheet"/>
  </head>
+
  <body>
   <br />
   <div class="container">
-   <h3>Verification OTP</h3>
+   <h1>Verification OTP</h1>
    <br />
    <div class="panel panel-default">
     <div class="panel-heading">
