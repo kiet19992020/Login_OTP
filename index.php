@@ -75,7 +75,7 @@ session_start();
                         </form>
                     </div>
                 </div>
-               
+
             </div>
         </div>
     </div>
@@ -84,7 +84,7 @@ session_start();
             <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
                 <rect class="shape" height="60" width="320" />
             </svg>
-            <h1 style="text-align: center;" class="text"><b><a href="forget_password.php?step1=1">Forgot Password</a></b></h1>
+            <h1 style="text-align: center;" class="text"><b><a href="forget_password.php?step1=1">Forgot Password?</a></b></h1>
         </div>
 </body>
 
